@@ -4,5 +4,5 @@ import teamReducer from './teamReducer';
 
 
 export default combineReducers({
-    teams: teamReducer
+    data: teamReducer
 });
