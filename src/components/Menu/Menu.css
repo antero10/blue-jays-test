@@ -1,0 +1,33 @@
+.sidebar {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background: #f7f7f7;
+    input {
+        width: calc(100% - 30px);
+        border: none;
+        background: #e0e0e0;
+        height: 30px;
+        border-radius: 5px;
+        text-indent: 10px;
+        color: #afafaf;
+    }
+    ul {
+        list-style: none;
+        li {
+            padding: 8px 15px 8px 15px; 
+            transition: .5s;
+            cursor: pointer;
+            color: #7b7b7b;
+            text-indent: 15px;
+            &:hover {
+                background: #e0e0e0;
+            }
+        }
+        li.active {
+            background:#d6d5d5;
+            box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+        }
+    }
+}
