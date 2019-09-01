@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
         case FETCH_TEAMS:
             return {
                 ...state,
-                items: action.payload
+                items: action.payload.teams
             }
         default:
             return state;

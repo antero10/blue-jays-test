@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchTeams } from '../actions/teamActions';
 
@@ -7,6 +8,7 @@ class Menu extends Component {
         this.props.fetchTeams();
     }
     render() {
+        console.log(this.props);
         return (
             <div>
                 Hola
@@ -15,4 +17,12 @@ class Menu extends Component {
     }
 }
 
-export default connect(null, { fetchTeams })(Menu);
+Menu.propTypes = {
+    fetchTeams: PropTypes.func.isRequired,
+    teams: PropTypes.array.isRequired
+}
+const mapStateToProps = state => ({
+    teams: state.teams.items,
+});
+
+export default connect(mapStateToProps, { fetchTeams })(Menu);
