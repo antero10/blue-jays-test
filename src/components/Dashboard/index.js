@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DataTable from 'react-data-table-component';
 import { fetchTeam, fetchRoster } from '../../actions/teamActions';
+import BarChart from '../BarChart';
+import './Dashboard.css';
 
 const columns = [
     {
@@ -27,17 +29,25 @@ const columns = [
   
 class Dashboard extends Component {
     componentDidMount() {
-    };
+    }
     render() {
         if (this.props.roster && this.props.roster.length > 0) {
             return (
-                <div>
-                    <DataTable
-                        className="data-table"
-                        title="Roster"
-                        columns={columns}
-                        data={this.props.roster}
-                    />
+                <div className="container-data">
+                    <div  className="graph card">
+                        <BarChart />
+                    </div>
+                    <div className="flex">
+                        <div className="card col-6 flex">
+                            <DataTable
+                                className="data-table"
+                                title="Roster"
+                                columns={columns}
+                                data={this.props.roster}
+                            />
+                        </div>
+                        <div className="card col-6 flex">3</div>
+                    </div>
                 </div>
             );
         }
@@ -47,6 +57,9 @@ class Dashboard extends Component {
                 </div>
             )
         }
+    }
+    onRowClicked() {
+        console.log('clicked');
     }
 }
 Dashboard.propTypes = {
