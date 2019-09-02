@@ -20,10 +20,10 @@ export const fetchTeam = (id) => dispatch => {
 }
 
 export const fetchRoster = (id) => dispatch => {
-    mlbService.get(`teams/${id}/roster`).then((team) => {
+    mlbService.get(`teams/${id}/roster`).then((roster) => {
         dispatch({
             type: FETCH_ROSTER,
-            payload: team.data
+            payload: roster.data
         });
     });
 }

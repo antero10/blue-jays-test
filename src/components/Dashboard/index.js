@@ -1,17 +1,43 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import DataTable from 'react-data-table-component';
 import { fetchTeam, fetchRoster } from '../../actions/teamActions';
-import TableData from '../Table';
 
+const columns = [
+    {
+      name: 'Name',
+      selector: 'person.fullName',
+      sortable: true,
+    },
+    {
+      name: 'Jersey number',
+      selector: 'jerseyNumber',
+      sortable: true,
+      format(row) {
+        return row.jerseyNumber ? row.jerseyNumber : 'NA';
+      }
+    },
+    {
+      name: 'Position',
+      selector: 'position.name',
+      sortable: true
+    }
+];
+  
 class Dashboard extends Component {
     componentDidMount() {
     };
     render() {
-        if (this.props.roster.length > 0) {
+        if (this.props.roster && this.props.roster.length > 0) {
             return (
                 <div>
-                    <TableData />
+                    <DataTable
+                        className="data-table"
+                        title="Roster"
+                        columns={columns}
+                        data={this.props.roster}
+                    />
                 </div>
             );
         }
@@ -25,7 +51,7 @@ class Dashboard extends Component {
 }
 Dashboard.propTypes = {
     team: PropTypes.object.isRequired,
-    roster: PropTypes.array.isRequired,
+    roster: PropTypes.array,
     fetchTeam: PropTypes.func.isRequired,
     fetchRoster: PropTypes.func.isRequired,
 }
