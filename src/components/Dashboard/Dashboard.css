@@ -1,0 +1,35 @@
+.container-data {
+    position: absolute;
+    width: calc(100% - 50px);
+    /* background-image: url(https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Major_League_Baseball_logo.svg/1200px-Major_League_Baseball_logo.svg.png); */
+    padding: 25px;
+    top: 50px;
+}
+.rdt_TableHeadRow.sc-bxivhb.jIaJrt {
+    background: #f7f7f7;
+}
+.sc-jKJlTe.jDHQPG {
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+div.graph {
+    height: 300px;
+    margin-bottom: 15px;
+}
+.card {
+    border-radius: 3px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    padding: 15px;
+    margin: 5px;
+    max-height: 300px;
+    overflow: auto;
+}
+.flex {
+    display: flex;
+}
+.col-6 {
+    width: 50%;
+}
+header.rdt_TableHeader.sc-kAzzGY.gXlqCi {
+    padding: 0;
+}
+
