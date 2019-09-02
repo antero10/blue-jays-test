@@ -1,8 +1,8 @@
 .sidebar {
     position: absolute;
     left: 0;
-    height: 100%;
-    width: 200px;
+    height: 50px;
+    width: 100%;
     background: #f7f7f7;
     input {
         width: calc(100% - 30px);
@@ -30,4 +30,25 @@
             box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
         }
     }
+}
+.shadow {
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.css-yk16xz-control,  .css-1pahdxg-control {
+    width: 200px;
+    float: right;
+    margin-top: 5px;
+    border: none;
+    margin-right: 10px;
+    max-width: 200px !important;
+}
+.css-yk16xz-control {
+    border-color: transparent !important;
+}
+div.css-26l3qy-menu {
+    margin-top: 50px;
+    width: 200px;
+    float: right;
+    right: 10px;
 }
