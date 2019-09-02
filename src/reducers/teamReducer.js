@@ -1,10 +1,11 @@
-import {FETCH_TEAMS, FETCH_TEAM, FETCH_ROSTER} from '../actions/types';
+import {FETCH_TEAMS, FETCH_TEAM, FETCH_ROSTER, FETCH_GAMES} from '../actions/types';
 
 
 const initialState = {
     teams: [],
     team: {},
-    roster: []
+    roster: [],
+    games: null
 };
 
 
@@ -24,6 +25,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 roster: action.payload.roster
+            }
+        case FETCH_GAMES:
+            return {
+                ...state,
+                games: action.payload.dates
             }
         default:
             return state;
