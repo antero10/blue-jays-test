@@ -4,7 +4,7 @@ import store from './store';
 import Menu from './components/Menu/';
 import Dashboard from './components/Dashboard/';
 import DashordPlayer from './components/DashboardPlayer'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import history from './history';
 
 import './App.css';

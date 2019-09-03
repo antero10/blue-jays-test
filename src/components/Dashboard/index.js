@@ -6,26 +6,6 @@ import { fetchTeamGamesData, fetchTeam, fetchRoster } from '../../actions/teamAc
 import BarChart from '../BarChart';
 import './Dashboard.css';
 
-const columns = [
-    {
-      name: 'Name',
-      selector: 'person.fullName',
-      sortable: true,
-    },
-    {
-      name: 'Jersey number',
-      selector: 'jerseyNumber',
-      sortable: true,
-      format(row) {
-        return row.jerseyNumber ? row.jerseyNumber : 'NA';
-      }
-    },
-    {
-      name: 'Position',
-      selector: 'position.name',
-      sortable: true
-    }
-];
 
 class Dashboard extends Component {
 
@@ -43,6 +23,34 @@ class Dashboard extends Component {
                 lost: []
             }
         };
+        this.fetchData(history);
+        this.columns = [
+            {
+              name: 'Name',
+              selector: 'person.fullName',
+              sortable: true,
+            },
+            {
+              name: 'Jersey number',
+              selector: 'jerseyNumber',
+              sortable: true,
+              format(row) {
+                return row.jerseyNumber ? row.jerseyNumber : 'NA';
+              }
+            },
+            {
+              name: 'Position',
+              selector: 'position.name',
+              sortable: true
+            }
+        ];
+        
+        this.onRowClicked = this.onRowClicked.bind(this);
+        
+        
+    }
+
+    fetchData(history) {
         fetchTeam(history.match.params.id).then((team) => {
             fetchRoster(team.id).then((roster) => {
                 this.setState({
@@ -81,10 +89,6 @@ class Dashboard extends Component {
             });
             
         });
-
-        this.onRowClicked = this.onRowClicked.bind(this);
-        
-        
     }
     render() {
         if (this.state.roster && this.state.roster.length > 0) {
@@ -108,7 +112,7 @@ class Dashboard extends Component {
                             <DataTable
                                 className="data-table"
                                 title="Roster"
-                                columns={columns}
+                                columns={this.columns}
                                 data={this.state.roster}
                                 onRowClicked={this.onRowClicked}
                             />
