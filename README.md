@@ -1,4 +1,4 @@
-# Blue Jay Test
+# Blue Jays Test
 
 This is the test for `Web Developer / Data Science` for `Blue Jays`
 
