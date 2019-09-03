@@ -1,10 +1,9 @@
 import * as moment from 'moment';
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import DataTable from 'react-data-table-component';
-import { fetchTeamGamesData } from '../../actions/teamActions';
+import { fetchTeamGamesData, fetchTeam, fetchRoster } from '../../actions/teamActions';
 import BarChart from '../BarChart';
+import { withRouter } from 'react-router-dom';
 import './Dashboard.css';
 
 const columns = [
@@ -30,20 +29,65 @@ const columns = [
 
 class Dashboard extends Component {
 
-    constructor() {
+    constructor(history) {
         super();
+        
         this.state = {
+            roster: [],
+            team: {},
+            games: [],
             data: {
                 datasets: [],
                 labels: [],
             }
         };
+        fetchTeam(history.match.params.id).then((team) => {
+            this.setState({
+                team
+            });
+
+            fetchRoster(team.id).then((roster) => {
+                this.setState({
+                    roster
+                });
+            });
+
+            fetchTeamGamesData(team.sport.id, team.id).then((games) => {
+                const _this = this;
+                const gamesWins = games.reduce((previousGame, currentGame) => {
+                    return this.getGameResults(previousGame, currentGame, _this);
+                    
+                }, {});
+                const gameLost = games.reduce((previousGame, currentGame) => {
+                    return this.getGameResults(previousGame, currentGame, _this, false);
+                }, {});
+                const datasets = ['Wins', 'Loose'].map((title) => {
+                    return {
+                        label: title,
+                        data: title === 'Wins' ? Object.values(gamesWins) : Object.values(gameLost), 
+                        backgroundColor: title === 'Wins' ? 'rgba(54, 162, 235, 0.2)' : 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 1
+                    }
+                });
+                const labels = Object.keys(gamesWins);
+                this.setState({
+                    games,
+                    data: {
+                        labels,
+                        datasets
+                    }
+                });
+            });
+            
+        });
+        
+        
     }
     render() {
-        if (this.props.roster && this.props.roster.length > 0) {
+        if (this.state.roster && this.state.roster.length > 0) {
             return (
                 <div className="container-data" style={{
-                    "backgroundImage": `linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.92)), url(https://www.mlbstatic.com/team-logos/${this.props.team.id}.svg)`
+                    "backgroundImage": `linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.92)), url(https://www.mlbstatic.com/team-logos/${this.state.team.id}.svg)`
                 }}>
                     <div  className="graph card">
                         <BarChart
@@ -59,7 +103,7 @@ class Dashboard extends Component {
                                 className="data-table"
                                 title="Roster"
                                 columns={columns}
-                                data={this.props.roster}
+                                data={this.state.roster}
                             />
                         </div>
                         <div className="card col-6 flex">3</div>
@@ -78,33 +122,10 @@ class Dashboard extends Component {
     onRowClicked() {
         console.log('clicked');
     }
-    componentWillReceiveProps() {
-        if (!this.props.games && Object.entries(this.props.team).length !== 0 ) {
-            this.props.fetchTeamGamesData(this.props.team.sport.id, this.props.team.id);
-        }
-        if (this.props.games && this.props.games.length > 0) {
-            const _this = this;
-            const gamesWins = this.props.games.reduce((previousGame, currentGame) => {
-                return this.getGameResults(previousGame, currentGame, _this);
-            }, {});
-            const gameLost = this.props.games.reduce((previousGame, currentGame) => {
-                return this.getGameResults(previousGame, currentGame, _this, false);
-            }, {});
-            const datasets = ['Wins', 'Loose'].map((title) => {
-                return {
-                    label: title,
-                    data: title === 'Wins' ? Object.values(gamesWins) : Object.values(gameLost), 
-                    backgroundColor: title === 'Wins' ? 'rgba(54, 162, 235, 0.2)' : 'rgba(255, 99, 132, 0.2)',
-                    borderWidth: 1
-                }
-            });
-            const labels = Object.keys(gamesWins);
-            this.setState({
-                data: {
-                    labels: labels,
-                    datasets: datasets
-                }
-            });
+    componentDidUpdate() {
+        if (this.state.games && this.state.games.length > 0) {
+            
+            
         }
     }
 
@@ -113,22 +134,10 @@ class Dashboard extends Component {
             previousGame[moment(currentGame.date).format('MMMM')] = 0;
         }
         currentGame.games.forEach((game) => {
-            const gameTeamInfo = game.teams.away.team.id === _this.props.team.id ? game.teams.away : game.teams.home;
-            previousGame[moment(currentGame.date).format('MMMM')] = previousGame[moment(currentGame.date).format('MMMM')] + (!(gameTeamInfo.isWinner ^ isWinning) ? 1 : 0)
+            const gameTeamInfo = game.teams.away.team.id === _this.state.team.id ? game.teams.away : game.teams.home;
+            previousGame[moment(currentGame.date).format('MMMM')] = previousGame[moment(currentGame.date).format('MMMM')] + ((gameTeamInfo.isWinner === isWinning) ? 1 : 0)
         });
         return previousGame;
     }
 }
-Dashboard.propTypes = {
-    team: PropTypes.object.isRequired,
-    roster: PropTypes.array,
-    fetchTeamGamesData: PropTypes.func.isRequired
-}
-
-const mapStateToProps = state => ({
-    team: state.data.team,
-    roster: state.data.roster,
-    games: state.data.games
-});
-
-export default connect(mapStateToProps, { fetchTeamGamesData })(Dashboard);
+export default withRouter(Dashboard);

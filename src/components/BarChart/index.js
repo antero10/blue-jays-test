@@ -12,7 +12,7 @@ class BarChart extends Component {
         this.char = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: this.props.labels,
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: this.props.datasets,
             },
             options: {
@@ -22,12 +22,14 @@ class BarChart extends Component {
         });
       
     }
-    
+
     componentDidUpdate() {
-        if (this.char) {
-            this.char.data.labels = this.props.labels;
-            this.char.data.datasets = this.props.datasets;
+        if (this.char && (this.props.labels.length > 0 && this.props.datasets.length > 0)) {
+            console.log(` before ${this.props.labels}`)
+            this.char.config.data.labels = this.props.labels;
+            this.char.config.data.datasets = this.props.datasets;
             this.char.update();
+            console.log(`after ${this.char.data.labels}`);
         }
     }
 

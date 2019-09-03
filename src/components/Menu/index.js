@@ -1,29 +1,39 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { fetchTeams, fetchTeam, fetchRoster, fetchTeamGamesData } from '../../actions/teamActions';
+import { fetchTeams } from '../../actions/teamActions';
 import './Menu.css';
 import Select from 'react-select';
+import { withRouter } from 'react-router-dom';
+
 
 
 class Menu extends Component {
-    state = {
-        selectedOption: null,
-    };
-
+    constructor() {
+        super();
+        this.state = {
+            selectedOption: null,
+            teams: [],
+            team: {}
+        };
+        fetchTeams().then((response) => {
+            this.setState({
+                teams: response
+            });
+        });
+        
+    }
+    
     componentDidMount() {
-        this.props.fetchTeams();
+        
     };
 
     handleChange = selectedOption => {
-        this.props.fetchTeam(selectedOption.value);
-        this.props.fetchRoster(selectedOption.value);
+        this.props.history.navigate(`team/${selectedOption.value.id}`);
     };
 
     render() {
-        const options = this.props.teams.map((team) => {
+        const options = this.state.teams.map((team) => {
             return {
-                value: team.id,
+                value: team,
                 label: team.name
             }
         });
@@ -36,28 +46,13 @@ class Menu extends Component {
                     value={team}
                     onChange={this.handleChange}
                     options={options}
+                    autoFocus
                 />
             </div>
         )
     }
+    
+
+    
 }
-
-Menu.propTypes = {
-    fetchTeams: PropTypes.func.isRequired,
-    fetchTeam: PropTypes.func.isRequired,
-    fetchRoster: PropTypes.func.isRequired,
-    fetchTeamGamesData: PropTypes.func.isRequired,
-    teams: PropTypes.array.isRequired,
-    team: PropTypes.object.isRequired,
-}
-
-const mapStateToProps = (state) => {
-    return {
-        teams: state.data.teams,
-        team: state.data.team
-    }
-}
-
-
-
-export default connect(mapStateToProps, { fetchTeams, fetchTeam, fetchRoster, fetchTeamGamesData })(Menu);
+export default withRouter(Menu);
