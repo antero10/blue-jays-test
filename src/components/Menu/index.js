@@ -19,6 +19,7 @@ class Menu extends Component {
                 teams: response
             });
         });
+        this.handleChange = this.handleChange.bind(this);
         
     }
     
@@ -26,8 +27,8 @@ class Menu extends Component {
         
     };
 
-    handleChange = selectedOption => {
-        this.props.history.navigate(`team/${selectedOption.value.id}`);
+    handleChange(selectedOption) {
+        this.props.history.push(`/team/${selectedOption.value.id}`);
     };
 
     render() {
