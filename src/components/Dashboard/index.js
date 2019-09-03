@@ -43,7 +43,7 @@ class Dashboard extends Component {
         if (this.props.roster && this.props.roster.length > 0) {
             return (
                 <div className="container-data" style={{
-                    "background-image": `linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.92)), url(https://www.mlbstatic.com/team-logos/${this.props.team.id}.svg)`
+                    "backgroundImage": `linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.92)), url(https://www.mlbstatic.com/team-logos/${this.props.team.id}.svg)`
                 }}>
                     <div  className="graph card">
                         <BarChart

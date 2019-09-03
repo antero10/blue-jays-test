@@ -32,6 +32,7 @@ class Menu extends Component {
         return (
             <div className="sidebar shadow">
                 <Select
+                    placeholder="Search for team"
                     value={team}
                     onChange={this.handleChange}
                     options={options}
