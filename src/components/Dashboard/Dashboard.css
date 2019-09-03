@@ -9,9 +9,13 @@
     background-size: 50%;
     background-position: 50%;
     background-position-y: 2px;
+    z-index: -1;
 }
 .rdt_TableHeadRow.sc-bxivhb.jIaJrt {
-    background: #f7f7f7;
+    background: #092668;
+}
+div.rdt_TableCol_Sortable {
+    color: white;
 }
 .sc-jKJlTe.jDHQPG {
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
@@ -64,4 +68,10 @@ header.rdt_TableHeader.sc-kAzzGY.gXlqCi {
         width: 100%;
         float: initial;
     }
+}
+.text-primary {
+    color: #092668;
+}
+.text-danger {
+    color: #771616;
 }

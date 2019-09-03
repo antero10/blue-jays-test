@@ -1,9 +1,9 @@
 .sidebar {
     position: absolute;
     left: 0;
-    height: 50px;
+    height: 70px;
     width: 100%;
-    background: #f7f7f7;
+    background: #092668;
     input {
         width: calc(100% - 30px);
         border: none;
@@ -38,17 +38,20 @@
 .css-yk16xz-control,  .css-1pahdxg-control {
     width: 200px;
     float: right;
-    margin-top: 5px;
+    margin-top: 15px;
     border: none;
-    margin-right: 10px;
+    margin-right: 25px;
     max-width: 200px !important;
 }
 .css-yk16xz-control {
     border-color: transparent !important;
 }
 div.css-26l3qy-menu {
-    margin-top: 50px;
+    margin-top: 52px;
     width: 200px;
     float: right;
-    right: 10px;
+    right: 25px;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+    opacity: .9;
 }

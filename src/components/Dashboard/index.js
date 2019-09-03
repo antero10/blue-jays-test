@@ -127,7 +127,7 @@ class Dashboard extends Component {
                                 </p>
                             </div>
                             <div className="text-center container-infon-number">
-                                <h1 className="m-0 font-size-90"> 
+                                <h1 className="m-0 font-size-90 text-primary"> 
                                    {totalWins}
                                 </h1>
                                 <p className="m-0 text-center"> 
@@ -135,7 +135,7 @@ class Dashboard extends Component {
                                 </p>
                             </div>
                             <div className="text-center container-infon-number">
-                                <h1 className="m-0 font-size-90"> 
+                                <h1 className="m-0 font-size-90  text-danger"> 
                                 {totalLost}
                                 </h1>
                                 <p className="m-0 text-center"> 
