@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchTeams, fetchTeam, fetchRoster } from '../../actions/teamActions';
+import { fetchTeams, fetchTeam, fetchRoster, fetchTeamGamesData } from '../../actions/teamActions';
 import './Menu.css';
 import Select from 'react-select';
 
@@ -14,10 +14,12 @@ class Menu extends Component {
     componentDidMount() {
         this.props.fetchTeams();
     };
+
     handleChange = selectedOption => {
         this.props.fetchTeam(selectedOption.value);
         this.props.fetchRoster(selectedOption.value);
     };
+
     render() {
         const options = this.props.teams.map((team) => {
             return {
@@ -43,6 +45,7 @@ Menu.propTypes = {
     fetchTeams: PropTypes.func.isRequired,
     fetchTeam: PropTypes.func.isRequired,
     fetchRoster: PropTypes.func.isRequired,
+    fetchTeamGamesData: PropTypes.func.isRequired,
     teams: PropTypes.array.isRequired,
     team: PropTypes.object.isRequired,
 }
@@ -56,4 +59,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { fetchTeams, fetchTeam, fetchRoster })(Menu);
+export default connect(mapStateToProps, { fetchTeams, fetchTeam, fetchRoster, fetchTeamGamesData })(Menu);

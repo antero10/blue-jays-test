@@ -3,33 +3,17 @@ import Chart from 'chart.js';
 
 
 class BarChart extends Component {
+    constructor() {
+        super();
+        this.char = null;
+    }
     componentDidMount() {
         var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
+        this.char = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX', 'XXXX'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, -10],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
+                labels: this.props.labels,
+                datasets: this.props.datasets,
             },
             options: {
                 responsive: true,
@@ -38,10 +22,19 @@ class BarChart extends Component {
         });
       
     }
+    
+    componentDidUpdate() {
+        if (this.char) {
+            this.char.data.labels = this.props.labels;
+            this.char.data.datasets = this.props.datasets;
+            this.char.update();
+        }
+    }
+
     render() {
         return (
             <div>
-                <canvas id="myChart" width="300" height="300"></canvas>
+                <canvas id="myChart" width={this.props.width} height={this.props.height}></canvas>
             </div>
         )
     }

@@ -1,9 +1,14 @@
 .container-data {
     position: absolute;
     width: calc(100% - 50px);
-    /* background-image: url(https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Major_League_Baseball_logo.svg/1200px-Major_League_Baseball_logo.svg.png); */
+    height: 100%;
     padding: 25px;
     top: 50px;
+    background: linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.92)), url(https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Major_League_Baseball_logo.svg/1200px-Major_League_Baseball_logo.svg.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 50%;
+    background-position-y: 2px;
 }
 .rdt_TableHeadRow.sc-bxivhb.jIaJrt {
     background: #f7f7f7;
