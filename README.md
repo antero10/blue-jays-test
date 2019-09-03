@@ -7,7 +7,7 @@ This is the test for `Web Developer / Data Science` for `Blue Jays`
 To make the app run in `dev` mode, follow this instructions:
 
 * First install the depdencies `npm install`
-* Then start the srver `npm run start`
+* Then start the srver `npm run dev`
 
 
 # Deploy
