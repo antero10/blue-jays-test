@@ -37,4 +37,28 @@ div.graph {
 header.rdt_TableHeader.sc-kAzzGY.gXlqCi {
     padding: 0;
 }
-
+.rdt_TableRow:hover {
+    background: #efefef;
+}
+.m-0 {
+    margin: 0;
+}
+.m-right-10 {
+    margin-right: 10px;
+}
+.font-size-90 {
+    font-size: 90px;
+}
+.text-center {
+    text-align: center;
+}
+.container-infon-number {
+    width: 50%;
+    float: left;
+}
+@media (max-width: 660px) {
+    .container-infon-number {
+        width: 100%;
+        float: initial;
+    }
+}

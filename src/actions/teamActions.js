@@ -2,7 +2,11 @@ import { mlbService } from '../services';
 
 export const fetchTeams = async () => {
     try {
-        const response = await mlbService.get('teams');
+        const response = await mlbService.get('teams', {
+            params: {
+                sportId: 1
+            }
+        });
         return response.data.teams;   
     } catch (e) {
         throw new Error(e);
@@ -11,7 +15,11 @@ export const fetchTeams = async () => {
 export const fetchTeam = async (id)  => {
     try {
         console.log(id);
-        const response = await mlbService.get(`teams/${id}`);
+        const response = await mlbService.get(`teams/${id}`, {
+            params: {
+                sportId: 1
+            }
+        });
         return response.data.teams[0];
     } catch (e) {
         throw new Error(e);
@@ -21,7 +29,11 @@ export const fetchTeam = async (id)  => {
 
 export const fetchRoster = async (id)  => {
     try {
-        const response = await mlbService.get(`teams/${id}/roster`);
+        const response = await mlbService.get(`teams/${id}/roster`, {
+            params: {
+                sportId: 1
+            }
+        });
         return response.data.roster;   
     } catch (e) {
         throw new Error(e);
@@ -36,7 +48,8 @@ export const fetchTeamGamesData = async (sportId, teamId, startDate = '01/01/201
                 sportId,
                 teamId,
                 startDate,
-                endDate
+                endDate,
+                gameType: 'R'
             }
         });
         return response.data.dates;
@@ -44,3 +57,12 @@ export const fetchTeamGamesData = async (sportId, teamId, startDate = '01/01/201
         throw new Error(e);
     }
 };
+
+export const fetchPlayer = async (id) => {
+    try {
+        const response = await mlbService.get(`people/${id}?hydrate=stats(group=[hitting,pitching,fielding],type=[yearByYear])`);
+        return response.data.people[0];
+    } catch (e) {
+        throw new Error(e);
+    }
+} 
